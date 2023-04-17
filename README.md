@@ -1,2 +1,4 @@
 # Threat-Hunting
-4/18/2023 - Sigma Rules 
+
+This repository will contain sigma rules 
+
