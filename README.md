@@ -1,3 +1,11 @@
 # Threat-Hunting
 
-This repository will contain topics related to MITRE with detection logics 
+Qbot BB22
+
+Microsoft Defender :
+
+**DeviceProcessEvents
+| where InitiatingProcessFileName contains "winzip" and 
+FileName contains "wscript.exe" and
+ProcessCommandLine contains "wsf"
+**
