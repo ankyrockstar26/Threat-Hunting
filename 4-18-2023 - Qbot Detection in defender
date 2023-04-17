@@ -1,0 +1,13 @@
+Qbot(BB22) Campaign 
+
+Logic : Detect Malicious Java/VB Script spawning from Winzip
+
+
+
+
+Detective Control - Defender 
+
+DeviceProcessEvents
+| where InitiatingProcessFileName contains "winzip.exe" and 
+FileName contains "wscript.exe" and
+ProcessCommandLine contains "wsf"
