@@ -1,4 +1,3 @@
 # Threat-Hunting
 
-This repository will contain sigma rules 
-
+This repository will contain topics related to MITRE with detection logics 
