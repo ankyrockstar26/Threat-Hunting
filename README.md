@@ -1,7 +1,7 @@
 # Threat-Hunting
 
-This repository will contain sigma rules, detections in multiple EDR's like 
+This repository will contain threat hunting detections for 
 
-1. Crowdstrike
-2. Defender
-3. Splunk
+a. Defender
+b. Crowdstrike
+c. Splunk
