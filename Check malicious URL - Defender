@@ -1,0 +1,9 @@
+let MaliciousIP = (
+     externaldata (Domain:string,Malware:string,Dateadded:datetime,Source:string)
+    [h@'https://raw.githubusercontent.com/ankyrockstar26/Threat-Hunting/main/Tycoon2FA%3A%20An%20In-Depth%20Analysis%20of%20the%20Latest%20Version%20of%20the%20AiTM%20Phishing%20Kit'] with (ignoreFirstRecord=true,format="csv")
+     //| where AddressType == "IPv4"
+ );
+ MaliciousIP
+| join kind=inner DeviceNetworkEvents on $left.Domain == $right.RemoteUrl
+| join kind=inner (DeviceInfo | distinct DeviceId, PublicIP) on DeviceId
+| project Timestamp, DeviceId, LocalPublicIP = PublicIP, LocalIP, RemoteIP, MaliciousURL = Domain, ActionType, InitiatingProcessFileName, InitiatingProcessFolderPath
