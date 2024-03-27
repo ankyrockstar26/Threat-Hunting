@@ -1,0 +1,59 @@
+Detections in Defender
+
+Antivirus Evasion via AMSI Bypass 
+
+1. Detects attempts to disable AMSI in the command line:  It is possible to bypass AMSI by disabling it before loading the main payload.
+
+DeviceProcessEvents | 
+where ((FolderPath endswith @'\powershell.exe' or FolderPath endswith @'\pwsh.exe' or FolderPath endswith @'\powershell_ise.exe') and 
+ProcessCommandLine contains @'[Ref].Assembly.GetType' and ProcessCommandLine contains @'SetValue($null,$true)' and 
+ProcessCommandLine contains @'NonPublic,Static')
+
+
+2. AMSI Bypass Pattern Assembly GetType : Detects code fragments found in small and obfuscated AMSI bypass PowerShell scripts
+
+DeviceEvents |
+where ActionType == "PowerShellCommand"  |
+where ((AdditionalFields contains @'[Ref].Assembly.GetType' or InitiatingProcessCommandLine contains @'[Ref].Assembly.GetType') and
+(AdditionalFields contains @'SetValue($null,$true)' or InitiatingProcessCommandLine contains @'SetValue($null,$true)') and
+(AdditionalFields contains @'NonPublic,Static' or InitiatingProcessCommandLine contains @'NonPublic,Static'))
+
+
+Indicator of compromise
+
+Loader (Variant 1)
+MD5 b69f65b999db695b27910689b7ed5cf0
+
+SHA256 ab9cd59d789e6c7841b9d28689743e700d492b5fae1606f184889cc7e6acadcc
+Loader (Variant 2)
+
+MD5- 38d6ebb40197248bc9149adeec8bd0e7
+SHA256 - a02388b5c352f13334f30244e9eedac3384bc2bf475d8bc667b0ce497769cc6a
+
+
+Packed Agent Tesla
+MD52bd452c46a861e59ac151a749047863f, 
+63f802e47b78ec3d52fe6b403bad823f
+
+SHA256 - e3cb3a5608f9a8baf9c1da86324474739d6c33f8369cc3bb2fd8c79e919089c4, f74e1a37a218dc6fcfabeb1435537f709d742505505a11e4757fc7417e5eb962
+
+Unpacked Agent Tesla
+MD5 - 3637aa1332b312fe77cc40b3f7adb8dc, 37b38ae2d99dd5beb08377d6cbd1bccd
+
+SHA256 - 3a1fe17d53a198f64051a449c388f54002e57995b529635758248dc4da7f5080, a3645f81079b19ff60386cb244696ea56f5418ae556fba4fd0afe77cfcb29211
+
+SMTP Exfiltration
+Sender email: merve@temikan[.]com[.]tr
+Receiver email: frevillon[.]acsitec@proton[.]me
+
+Download URLs
+hxxps[://]artemis-rat[.]com/get/65f0e7dd5b705f429be16c65
+hxxps[://]artemis-rat[.]com/get/65eb0afe3a680a9851f23712
+
+User-Agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, killer Gecko) Chrome/58.0.3029.110 Safari/537.3
+
+List of Proxy Servers
+hxxps[://]github[.]com/TheSpeedX/PROXY-List/blob/master/hxxp[.]txt
+
+Reference Article - https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/agent-teslas-new-ride-the-rise-of-a-novel-loader/?&web_view=true
